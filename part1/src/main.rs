@@ -9,7 +9,7 @@ fn main() {
 fn print_population(adults: u64, kids: u32, buildings: u32) {
     let population = kids as u64 + adults;
 
-    let buildings_per_person = population as f64 / buildings as f64 ;
+    let buildings_per_person = buildings as f64 / population as f64;
 
     println!("    Population: {}", population);
     println!("        Adults: {}", adults);
