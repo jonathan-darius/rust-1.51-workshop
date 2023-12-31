@@ -1,9 +1,11 @@
+ #[allow(dead_code)]
 enum CitySize {
     Town,       // approximate residents: 1_000
     City,       // approximate residents: 10_000
     Metropolis, // approximate residents: 1_000_000
 }
 
+ #[allow(dead_code)]
 struct City {
     description: String,
     residents: u64,
@@ -15,17 +17,28 @@ impl City {
         let (description, residents) = match city_size {
             CitySize::Town => {
                 let residents = 1_000;
-
                 (
                     format!("a *town* of approximately {} residents", residents),
                     residents,
                 )
             }
-            // 👉 TODO Handle the other CitySize variants individually,
-            //    in a similar way to how *town* is handled here
+            CitySize::City => {
+                let residents = 10_000;
+                 (
+                    format!("a *City* of approximately {} residents", residents),
+                    residents,
+                )
+            }
+            CitySize::Metropolis => {
+                let residents = 1_000_000;
+                (
+                    format!("a *Metropolis* of approximately {} residents", residents),
+                    residents,
+                )
+            }
+             #[allow(unreachable_patterns)]
             _ => {
                 let residents = 1_000;
-
                 (
                     format!(
                         "an *unknown-size city* of approximately {} residents",
@@ -45,11 +58,7 @@ impl City {
 }
 
 fn main() {
-    // 👉 TODO Use City::new() to create a Metropolis-sized city here
-    let rustville = City {
-        description: String::new(),
-        residents: 0,
-    };
+    let rustville = City::new(CitySize::Metropolis, true);
 
     println!("This city is {}", rustville.description);
 
